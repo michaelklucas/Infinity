@@ -132,6 +132,16 @@ Desenvolvido com ❤️ por [Michael Simão](https://github.com/michaelklucas)
 
 ---
 
+## 💝 Doações
+
+Se você gostou do Infinity e deseja apoiar o desenvolvimento e a manutenção do framework, considere fazer uma doação via Pix:
+
+**Chave Pix:** `michael16klucas@gmail.com`
+
+Agradeço imensamente qualquer contribuição — cada apoio ajuda a financiar melhorias, manutenção e novas funcionalidades.
+
+---
+
 <p align="center">
   <img src="./resources/view/assets/favicon.svg" alt="Infinity Framework" width="80">
 </p>

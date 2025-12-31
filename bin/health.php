@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 /**
- * Health Check para LudraLeads
+ * Health Check
  * 
  * Verifica status de todos os componentes críticos
  * Usage: php bin/health.php

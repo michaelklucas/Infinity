@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 /**
- * Migration Runner for LudraLeads
+ * Migration Runner
  * 
  * Executa todas as migrations SQL na pasta db/migrations/
  * Usage: php bin/migrate.php [status|migrate]

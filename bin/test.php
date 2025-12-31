@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 /**
- * Quick Test Suite para LudraLeads
+ * Quick Test Suite
  * 
  * Valida principais funcionalidades
  * Usage: php bin/test.php

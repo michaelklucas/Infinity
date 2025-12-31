@@ -78,7 +78,7 @@ echo "║  O DebugBar está pronto para uso!                    ║\n";
 echo "║                                                       ║\n";
 echo "║  Para ver o debug bar em ação:                        ║\n";
 echo "║  1. Configure APP_DEBUG=true em .env                  ║\n";
-echo "║  2. Acesse a aplicação em http://ludraleads.localhost║\n";
+echo "║  2. Acesse a aplicação em http://localhost║\n";
 echo "║  3. Se ocorrer um erro, verá o debug bar              ║\n";
 echo "║                                                       ║\n";
 echo "║  Guia de uso: DEBUGBAR_USAGE.md                       ║\n";

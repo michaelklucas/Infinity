@@ -1,0 +1,40 @@
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+    <div>
+        <h2 style="margin: 0; font-size: 1.8rem; font-weight: 700;">Clientes</h2>
+        <p style="color: var(--text-muted); margin-top: 5px;">Gerencie sua base de clientes com eficiência.</p>
+    </div>
+    <a href="/clientes/novo" class="btn">
+        <i class='bx bx-plus' style="font-size: 1.2rem; margin-right: 8px;"></i> Novo Cliente
+    </a>
+</div>
+
+<div class="card" style="padding: 0; overflow: hidden; backdrop-filter: blur(15px); border: 1px solid var(--border);">
+    <div style="overflow-x: auto;">
+        <table class="debug-table" style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background: rgba(0,0,0,0.2); border-bottom: 1px solid var(--border);">
+                    <th
+                        style="padding: 20px 24px; font-weight: 600; font-size: 0.8rem; letter-spacing: 1px; color: var(--text-muted);">
+                        ID</th>
+                    <th
+                        style="padding: 20px 24px; font-weight: 600; font-size: 0.8rem; letter-spacing: 1px; color: var(--text-muted);">
+                        CLIENTE</th>
+                    <th
+                        style="padding: 20px 24px; font-weight: 600; font-size: 0.8rem; letter-spacing: 1px; color: var(--text-muted);">
+                        CONTATO</th>
+                    <th
+                        style="padding: 20px 24px; font-weight: 600; font-size: 0.8rem; letter-spacing: 1px; color: var(--text-muted);">
+                        STATUS</th>
+                    <th
+                        style="padding: 20px 24px; text-align: right; font-weight: 600; font-size: 0.8rem; letter-spacing: 1px; color: var(--text-muted);">
+                        AÇÕES</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{itens}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{{pagination}}

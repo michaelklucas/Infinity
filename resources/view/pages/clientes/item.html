@@ -1,0 +1,42 @@
+<tr style="border-bottom: 1px solid var(--border); transition: background 0.3s;"
+    onmouseover="this.style.background='rgba(255,255,255,0.03)'" onmouseout="this.style.background='transparent'">
+    <td style="padding: 20px 24px;">
+        <span style="font-family: monospace; color: var(--text-muted);">#{{id}}</span>
+    </td>
+    <td style="padding: 20px 24px;">
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <div
+                style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; font-size: 0.9rem;">
+                <i class='bx bx-user'></i>
+            </div>
+            <div>
+                <div style="font-weight: 600; color: var(--text); font-size: 0.95rem;">{{nome}}</div>
+                <div style="color: var(--text-muted); font-size: 0.85rem;">{{email}}</div>
+            </div>
+        </div>
+    </td>
+    <td style="padding: 20px 24px;">
+        <div style="display: flex; align-items: center; gap: 8px; color: var(--text-muted);">
+            <i class='bx bx-phone' style="font-size: 1.1rem;"></i>
+            <span>{{telefone}}</span>
+        </div>
+    </td>
+    <td style="padding: 20px 24px;">
+        <span class="badge {{status_class}}"
+            style="padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.5px;">{{status}}</span>
+    </td>
+    <td style="padding: 20px 24px; text-align: right;">
+        <div style="display: inline-flex; gap: 8px;">
+            <a href="/clientes/{{id}}/editar" class="btn-action"
+                style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 8px; background: rgba(99, 102, 241, 0.1); color: #818cf8; transition: all 0.2s; border: 1px solid rgba(99, 102, 241, 0.2);"
+                title="Editar">
+                <i class='bx bxs-edit' style="font-size: 1rem;"></i>
+            </a>
+            <a href="/clientes/{{id}}/excluir" class="btn-action"
+                style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 8px; background: rgba(239, 68, 68, 0.1); color: #f87171; transition: all 0.2s; border: 1px solid rgba(239, 68, 68, 0.2);"
+                title="Excluir" onclick="return confirm('Deseja realmente excluir este cliente?')">
+                <i class='bx bxs-trash' style="font-size: 1rem;"></i>
+            </a>
+        </div>
+    </td>
+</tr>

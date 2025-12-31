@@ -1,0 +1,30 @@
+{
+    "name": "infinity/infinity",
+    "description": "Elegância, Velocidade e Simplicidade. O Framework PHP que o Brasil merece.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michael Simão",
+            "email": "contato@infinity.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "App\\Config\\": "app/Config/src/"
+        }
+    },
+    "require": {
+        "phpmailer/phpmailer": "^6.8",
+        "aws/aws-sdk-php": "^3.344",
+        "ralouphie/getallheaders": "^3.0",
+        "predis/predis": "^3.0"
+    },
+    "config": {
+        "platform": {
+            "php": "8.2.0"
+        }
+    }
+}

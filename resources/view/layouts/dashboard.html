@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}} - Dashboard Infinity</title>
+    <link rel="icon" type="image/svg+xml" href="/resources/view/assets/favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        :root {
+            --bg: #0b0f1a;
+            --sidebar: rgba(19, 25, 38, 0.8);
+            --card: rgba(30, 41, 59, 0.6);
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.06);
+            --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image:
+                radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(168, 85, 247, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+            color: var(--text);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Style */
+        aside {
+            width: 280px;
+            background: var(--sidebar);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            padding: 40px 0;
+            position: fixed;
+            height: 100vh;
+            z-index: 1000;
+        }
+
+        .sidebar-logo {
+            padding: 0 25px 40px;
+            display: block;
+            text-decoration: none;
+        }
+
+        /* Brand Logo Style - Synced with Main */
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .brand-logo {
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.6));
+        }
+
+        .brand-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .infinity-mark {
+            fill: none;
+            stroke: url(#infinity-gradient);
+            stroke-width: 8;
+            stroke-linecap: round;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawInfinity 3s ease forwards, glowPulse 2s infinite alternate;
+        }
+
+        @keyframes drawInfinity {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes glowPulse {
+            from {
+                filter: drop-shadow(0 0 5px rgba(99, 102, 241, 0.5));
+            }
+
+            to {
+                filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.8));
+            }
+        }
+
+        .menu-items {
+            list-style: none;
+            flex: 1;
+        }
+
+        .menu-items li a {
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+
+        .menu-items li a i {
+            font-size: 1.3rem;
+        }
+
+        .menu-items li a:hover,
+        .menu-items li a.active {
+            color: var(--text);
+            background: rgba(99, 102, 241, 0.1);
+            border-left-color: var(--primary);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            margin-left: 260px;
+            padding: 40px;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--sidebar);
+            padding: 8px 16px;
+            border-radius: 50px;
+            border: 1px solid var(--border);
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        /* Elements */
+        .btn {
+            background: var(--accent-gradient);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            margin-left: 8px;
+        }
+
+        .btn-action:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .card {
+            background: var(--card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+        }
+
+        /* Table Style */
+        .debug-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .debug-table th {
+            text-align: left;
+            padding: 16px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .debug-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        .debug-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .debug-table tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Pagination */
+        .pagination-list {
+            display: flex;
+            gap: 8px;
+            margin-top: 24px;
+            justify-content: center;
+        }
+
+        .pagination-item {
+            min-width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+        }
+
+        .pagination-item:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Components */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .stat-card {
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            padding: 24px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-card h4 {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        /* Toasts Modernos */
+        .toast-container {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            pointer-events: none;
+        }
+
+        .alert {
+            pointer-events: auto;
+            min-width: 320px;
+            max-width: 400px;
+            padding: 18px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            display: none;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            background: var(--sidebar);
+            /* Mesmo estilo do painel */
+            border: 1px solid var(--border);
+            color: var(--text);
+            animation: slideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .alert::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 100%;
+            background: var(--primary);
+            animation: progress 5s linear forwards;
+        }
+
+        .alert-success {
+            border-left: 4px solid #10b981;
+        }
+
+        .alert-success .toast-icon {
+            color: #10b981;
+        }
+
+        .alert-success::after {
+            background: #10b981;
+        }
+
+        .alert-error {
+            border-left: 4px solid #ef4444;
+        }
+
+        .alert-error .toast-icon {
+            color: #ef4444;
+        }
+
+        .alert-error::after {
+            background: #ef4444;
+        }
+
+        .toast-content {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .toast-icon {
+            font-size: 1.4rem;
+        }
+
+        @keyframes progress {
+            from {
+                width: 100%;
+            }
+
+            to {
+                width: 0%;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px) scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateX(20px) scale(0.9);
+            }
+        }
+
+        /* Badges */
+        .badge {
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .badge-danger {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside>
+        <a href="/" class="sidebar-logo">
+            <div class="brand-container">
+                <svg class="brand-logo" viewBox="0 0 100 50">
+                    <defs>
+                        <linearGradient id="infinity-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#a855f7;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <path class="infinity-mark"
+                        d="M50,25 C35,10 15,10 15,25 C15,40 35,40 50,25 C65,10 85,10 85,25 C85,40 65,40 50,25" />
+                </svg>
+                <span class="brand-text">INFINITY</span>
+            </div>
+        </a>
+        <ul class="menu-items">
+            <li><a href="/dashboard"><i class='bx bxs-dashboard'></i> Painel Principal</a></li>
+            <li><a href="/clientes"><i class='bx bxs-user-detail'></i> Gerenciar Clientes</a></li>
+            <li><a href="#"><i class='bx bxs-cog'></i> Configurações</a></li>
+            <li style="margin-top: auto;"><a href="/" style="color: #f87171;"><i class='bx bx-log-out'></i> Sair</a>
+            </li>
+        </ul>
+    </aside>
+
+    <main>
+        <header class="top-bar">
+            <h2>{{title}}</h2>
+            <div class="user-profile">
+                <div class="avatar">MS</div>
+                <span>Michael Simão (Admin)</span>
+            </div>
+        </header>
+
+        <div class="toast-container">
+            <div id="toast-success" class="alert alert-success">
+                <div class="toast-content">
+                    <i class='bx bxs-check-circle toast-icon'></i>
+                    <span id="msg-success">{{flash.success}}</span>
+                </div>
+            </div>
+            <div id="toast-error" class="alert alert-error">
+                <div class="toast-content">
+                    <i class='bx bxs-error-circle toast-icon'></i>
+                    <span id="msg-error">{{flash.error}}</span>
+                </div>
+            </div>
+        </div>
+
+
+
+        <section class="content">
+            {{content}}
+        </section>
+
+
+        <footer
+            style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; display: flex; justify-content: space-between;">
+            <span>&copy; 2025 Infinity SaaS - Sistema de Gerenciamento</span>
+            <span><i class='bx bx-time'></i> Página gerada em: <strong>{{generated_at}}</strong></span>
+        </footer>
+    </main>
+
+    <script>
+        function showToast(id) {
+            const toast = document.getElementById(id);
+            const msg = toast.querySelector('span[id^="msg-"]').innerText.trim();
+
+            if (msg !== '') {
+                toast.style.display = 'flex';
+
+                // Auto-ocultar após 5 segundos
+                setTimeout(() => {
+                    toast.style.animation = 'fadeOut 0.5s ease forwards';
+                    setTimeout(() => {
+                        toast.style.display = 'none';
+                    }, 500);
+                }, 5000);
+            }
+        }
+
+        // Verifica Toasts ao carregar a página
+        window.addEventListener('load', () => {
+            showToast('toast-success');
+            showToast('toast-error');
+        });
+    </script>
+</body>
+
+</html>

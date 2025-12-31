@@ -1,0 +1,63 @@
+<div class="card" style="max-width: 700px; margin: 0 auto; backdrop-filter: blur(15px);">
+    <div style="margin-bottom: 25px;">
+        <h3 style="margin: 0; font-size: 1.5rem;">{{form_title}}</h3>
+        <p style="color: var(--text-muted); margin-top: 5px;">Gerencie as informações do cliente com precisão.</p>
+    </div>
+
+    <form method="POST">
+        {{csrf}}
+        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 0;">
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 0.9rem;">Nome
+                    Completo</label>
+                <input type="text" name="nome" value="{{nome}}"
+                    style="width: 100%; padding: 12px 16px; border-radius: 12px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); color: white; outline: none; transition: border-color 0.3s;"
+                    onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border)'"
+                    required>
+                <span style="color: #f87171; font-size: 0.8rem; display: block; margin-top: 5px;">{{error.nome}}</span>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 0.9rem;">E-mail
+                    Corporativo</label>
+                <input type="email" name="email" value="{{email}}"
+                    style="width: 100%; padding: 12px 16px; border-radius: 12px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); color: white; outline: none; transition: border-color 0.3s;"
+                    onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border)'"
+                    required>
+                <span style="color: #f87171; font-size: 0.8rem; display: block; margin-top: 5px;">{{error.email}}</span>
+            </div>
+        </div>
+
+        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 0;">
+            <div style="margin-bottom: 20px;">
+                <label
+                    style="display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 0.9rem;">Telefone</label>
+                <input type="text" name="telefone" value="{{telefone}}" placeholder="(00) 00000-0000"
+                    style="width: 100%; padding: 12px 16px; border-radius: 12px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); color: white; outline: none; transition: border-color 0.3s;"
+                    onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border)'">
+            </div>
+
+            <div style="margin-bottom: 30px;">
+                <label style="display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 0.9rem;">Status
+                    da Conta</label>
+                <select name="status"
+                    style="width: 100%; padding: 12px 16px; border-radius: 12px; background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border); color: white; outline: none; appearance: none; cursor: pointer;"
+                    onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border)'">
+                    <option value="ativo" {{status_ativo}}>Ativo</option>
+                    <option value="inativo" {{status_inativo}}>Inativo</option>
+                </select>
+            </div>
+        </div>
+
+        <div
+            style="display: flex; gap: 15px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
+            <button type="submit" class="btn">
+                <i class='bx bx-save' style="margin-right: 8px;"></i> Salvar Dados
+            </button>
+            <a href="/clientes" class="btn"
+                style="background: transparent; border: 1px solid var(--border); color: var(--text-muted);">
+                <i class='bx bx-arrow-back' style="margin-right: 8px;"></i> Cancelar
+            </a>
+        </div>
+    </form>
+</div>

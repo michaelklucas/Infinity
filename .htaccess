@@ -1,0 +1,47 @@
+# Não listar diretórios
+Options All -Indexes
+
+# Ativa o mod_rewrite
+RewriteEngine on
+
+# Bloqueia requisições com "script" na query string (prevenção básica contra XSS malandro)
+RewriteCond %{QUERY_STRING} "script"
+RewriteRule .* - [F]
+
+# Se o arquivo ou pasta não existir, redireciona tudo pra index.php (rota amigável estilo MVC)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ ./index.php [QSA,NC]
+
+# Protege arquivos sensíveis
+<FilesMatch "\.env$">
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "\.env\.example$">
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "\.lock$">
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "\.md$">
+    Deny from all
+</FilesMatch>
+
+# Permite acesso à pasta 'docs' (documentação)
+RewriteRule ^docs/(.*)$ docs/$1 [L]
+
+# Permite acesso ao manifest.json (exigido pelo PWA)
+<Files "manifest.json">
+    Order allow,deny
+    Allow from all
+</Files>
+
+# Restringe outros arquivos .json (libera só IPs específicos)
+<FilesMatch "\.json$">
+    Order allow,deny
+    Allow from 192.168.15.152
+    Allow from 192.168.15.8
+</FilesMatch>

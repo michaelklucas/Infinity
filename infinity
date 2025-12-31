@@ -1,0 +1,67 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Infinity Framework - CLI Console
+ */
+
+require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/includes/app.php';
+
+use App\Utils\Logger;
+use App\Database\AutoMigrate;
+
+// Define as cores para o console
+$green = "\033[32m";
+$red = "\033[31m";
+$yellow = "\033[33m";
+$blue = "\033[34m";
+$reset = "\033[0m";
+
+$argv = $_SERVER['argv'];
+$command = $argv[1] ?? 'help';
+
+echo "{$blue}Infinity Framework Console{$reset}\n";
+echo "--------------------------\n";
+
+switch ($command) {
+    case 'migrate':
+        echo "{$yellow}Iniciando migrações...{$reset}\n";
+        try {
+            AutoMigrate::run();
+            echo "{$green}Migrações concluídas com sucesso!{$reset}\n";
+        } catch (\Exception $e) {
+            echo "{$red}Erro na migração: " . $e->getMessage() . "{$reset}\n";
+        }
+        break;
+
+    case 'cache:clear':
+        echo "{$yellow}Limpando cache...{$reset}\n";
+        $files = glob(__DIR__ . '/storage/cache/*.txt');
+        foreach ($files as $file) {
+            unlink($file);
+        }
+        echo "{$green}Cache limpo com sucesso!{$reset}\n";
+        break;
+
+    case 'make:controller':
+        $name = $argv[2] ?? null;
+        if (!$name) {
+            echo "{$red}Erro: Nome do controlador não informado.{$reset}\n";
+            exit;
+        }
+        $path = __DIR__ . "/app/Controller/Pages/{$name}.php";
+        $content = "<?php\n\nnamespace App\Controller\Pages;\n\nuse App\Utils\View;\n\nclass {$name} extends Page {\n    public static function get{$name}() {\n        return parent::getPage('{$name}', [\n            'title' => '{$name}'\n        ]);\n    }\n}\n";
+        file_put_contents($path, $content);
+        echo "{$green}Controlador {$name} criado em app/Controller/Pages/{$name}.php{$reset}\n";
+        break;
+
+    case 'help':
+    default:
+        echo "Comandos disponíveis:\n";
+        echo "  {$yellow}migrate{$reset}             Executa as migrações do banco de dados\n";
+        echo "  {$yellow}cache:clear{$reset}         Limpa todos os arquivos de cache\n";
+        echo "  {$yellow}make:controller [N]{$reset} Cria um novo controlador de página\n";
+        echo "  {$yellow}make:model [N]{$reset}      Cria um novo modelo de entidade\n";
+        break;
+}
+echo "\n";

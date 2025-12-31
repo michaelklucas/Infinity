@@ -1,0 +1,16 @@
+# Permitir acesso à documentação
+RewriteEngine On
+
+# Não listar diretórios
+Options All -Indexes
+
+# Permitir acesso direto aos arquivos PHP
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# Permitir acesso a pastas
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Se não for arquivo nem pasta, redireciona para index.php
+RewriteRule ^(.*)$ index.php [QSA,NC,L]

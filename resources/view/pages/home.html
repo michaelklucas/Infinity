@@ -1,0 +1,49 @@
+<section class="hero animate">
+    <!-- Massive Glowing Logo from Image -->
+    <div style="display: flex; justify-content: center; margin-bottom: 3rem;">
+        <svg style="width: 100%;height: 250px;filter: drop-shadow(0 0 35px rgba(99, 102, 241, 0.6));"
+            viewBox="0 0 100 50">
+            <defs>
+                <linearGradient id="hero-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#a855f7;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            <path d="M50,25 C35,10 15,10 15,25 C15,40 35,40 50,25 C65,10 85,10 85,25 C85,40 65,40 50,25" fill="none"
+                stroke="url(#hero-gradient)" stroke-width="7" stroke-linecap="round" />
+        </svg>
+    </div>
+
+    <h1>Infinity Framework</h1>
+    <p>O próximo nível da elegância em PHP. Simples, veloz e esteticamente impecável.</p>
+
+    <div style="display: flex; gap: 20px; justify-content: center;">
+        <a href="/register" class="btn">Começar Agora</a>
+        <a href="/docs" target="_blank" class="btn"
+            style="background: var(--glass); border: 1px solid var(--glass-border); display: flex; align-items: center; gap: 8px;">
+            <i class='bx bxs-book-content'></i> Documentação
+        </a>
+    </div>
+</section>
+
+<div class="grid animate" style="animation-delay: 0.2s;">
+    {{features}}
+    <div class="card">
+        <i class='bx bx-rocket'
+            style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1.5rem; display: block;"></i>
+        <h3>Performance Extrema</h3>
+        <p>Núcleo minimalista otimizado para baixíssima latência e experiências em tempo real.</p>
+    </div>
+    <div class="card">
+        <i class='bx bx-layer'
+            style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 1.5rem; display: block;"></i>
+        <h3>Arquitetura MVC</h3>
+        <p>Separação clara de responsabilidades seguindo os mais altos padrões da comunidade.</p>
+    </div>
+    <div class="card">
+        <i class='bx bx-shield-quarter'
+            style="font-size: 2.5rem; color: #10b981; margin-bottom: 1.5rem; display: block;"></i>
+        <h3>Segurança Nativa</h3>
+        <p>Proteção robusta contra CSRF, XSS e SQL Injection injetada diretamente no core.</p>
+    </div>
+</div>

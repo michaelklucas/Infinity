@@ -1,14 +1,10 @@
 #!/usr/bin/env php
 <?php
 /**
- * Quick Test Suite
+ * Quick Test Suite para LudraLeads
  * 
  * Valida principais funcionalidades
  * Usage: php bin/test.php
- *
- * Infinity Framework
- * @author Infinity
- * @package Bin
  */
 
 require_once __DIR__ . '/../includes/app.php';
@@ -17,16 +13,6 @@ $tests = [];
 $passed = 0;
 $failed = 0;
 
-/**
- * Simple assert helper for CLI tests.
- *
- * @param bool $condition
- * @param string $message
- * @param int &$passed
- * @param int &$failed
- * @param array &$tests
- * @return void
- */
 function assert_true($condition, $message, &$passed, &$failed, &$tests) {
     if ($condition) {
         echo "✅ $message\n";

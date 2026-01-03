@@ -13,12 +13,6 @@
  *   php bin/generate-docs.php html docs.html
  */
 
-/**
- * Infinity Framework
- * @author Infinity
- * @package Bin
- */
-
 require_once dirname(__DIR__) . '/includes/app.php';
 
 use App\Utils\Documentation;

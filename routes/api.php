@@ -1,9 +1,4 @@
 <?php
-/**
- * Infinity Framework
- * @author Infinity
- * @package Routes\API
- */
 
 use App\Http\Response;
 

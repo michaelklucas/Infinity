@@ -1,9 +1,4 @@
 <?php
-/**
- * Infinity Framework
- * @author Infinity
- * @package Includes
- */
 require __DIR__ . '/../vendor/autoload.php';
 
 use App\Config\src\Environment;

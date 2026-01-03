@@ -1,9 +1,4 @@
 <?php
-/**
- * Infinity Framework
- * @author Infinity
- * @package Bin
- */
 
 require __DIR__ . '/../includes/app.php';
 

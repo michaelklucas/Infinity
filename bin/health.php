@@ -1,14 +1,10 @@
 #!/usr/bin/env php
 <?php
 /**
- * Health Check
+ * Health Check para LudraLeads
  * 
  * Verifica status de todos os componentes críticos
  * Usage: php bin/health.php
- *
- * Infinity Framework
- * @author Infinity
- * @package Bin
  */
 
 require_once __DIR__ . '/../includes/app.php';

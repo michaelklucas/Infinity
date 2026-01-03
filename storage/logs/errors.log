@@ -1,0 +1,3 @@
+[2026-01-03 02:22:08] ErrorException: Declaration of App\Controller\Pages\TestSSE::getPage() must be compatible with App\Controller\Pages\Page::getPage($title, $content) in C:\xampp\htdocs\pontolinkado\app\Controller\Pages\TestSSE.php:14
+#0 [internal function]: App\Exceptions\ExceptionHandler::handleShutdown()
+#1 {main}

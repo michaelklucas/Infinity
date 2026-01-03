@@ -1,9 +1,4 @@
 <?php
-/**
- * Infinity Framework
- * @author Infinity
- * @package App\Controller\Pages
- */
 
 namespace App\Controller\Pages;
 
@@ -13,11 +8,6 @@ use App\Utils\Session;
 use App\Utils\CSRF;
 use App\Http\Response;
 
-/**
- * Controller responsável por registro de usuários.
- *
- * @package App\Controller\Pages
- */
 class Register extends Page
 {
     /**
@@ -37,21 +27,22 @@ class Register extends Page
      * Processa o formulário de cadastro
      * @param Request $request
      */
+    /**
+     * Processa o formulário de cadastro
+     * @param Request $request
+     */
     public static function insertRegister($request)
     {
         $postVars = $request->getPostVars();
 
-        // 1. Validação usando o novo utilitário
-        $v = Validator::make($postVars, [
-            'nome' => 'required|min:3',
-            'email' => 'required|email', // Nota: unique:usuarios só funcionaria se a tabela existisse
-            'senha' => 'required|min:8'
-        ]);
+        // Instancia o serviço
+        $userService = new \App\Services\UserService();
+        $result = $userService->register($postVars);
 
-        if ($v->fails()) {
+        if (!$result['success']) {
             // Mapeia os erros para o formato da view {{error.campo}}
             $viewErrors = [];
-            foreach ($v->getErrors() as $field => $msg) {
+            foreach ($result['errors'] as $field => $msg) {
                 $viewErrors['error.' . $field] = $msg;
             }
 
@@ -60,10 +51,10 @@ class Register extends Page
             ], $viewErrors)));
         }
 
-        // 2. Simula o sucesso e usa Flash Message
-        Session::flash('success', 'Conta criada com sucesso! Bem-vindo ao Infinity.');
+        // Sucesso
+        Session::flash('success', $result['message']);
 
-        // 3. Redireciona para o Dashboard
+        // Redireciona para o Dashboard
         header('Location: /dashboard');
         exit;
     }

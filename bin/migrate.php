@@ -1,14 +1,10 @@
 #!/usr/bin/env php
 <?php
 /**
- * Migration Runner
+ * Migration Runner for LudraLeads
  * 
  * Executa todas as migrations SQL na pasta db/migrations/
  * Usage: php bin/migrate.php [status|migrate]
- *
- * Infinity Framework
- * @author Infinity
- * @package Bin
  */
 
 error_reporting(E_ALL);

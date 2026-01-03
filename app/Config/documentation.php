@@ -21,6 +21,60 @@ use App\Utils\MaintenanceMode;
 
 // ================== COMPONENTES CORE ==================
 
+Documentation::register('Model', [
+    'title' => 'Active Record ORM',
+    'category' => 'Database',
+    'description' => 'Mapeamento objeto-relacional (ORM) para simplificar operações de banco de dados.',
+    'version' => '2.0.0',
+    'author' => 'Infinity',
+    'tags' => ['database', 'orm', 'active-record'],
+    'since' => '2.0.0',
+    'example' => 'use App\Model\Entity\User;
+$user = User::create(["nome" => "Teste"]);
+$pedidos = $user->hasMany(Pedido::class);',
+    'usage' => 'class User extends Model {}'
+]);
+
+Documentation::method('Model', 'find', [
+    'description' => 'Busca registro por ID',
+    'return' => 'static|null'
+]);
+
+Documentation::method('Model', 'where', [
+    'description' => 'Filtra registros',
+    'return' => 'array'
+]);
+
+Documentation::method('Model', 'save', [
+    'description' => 'Salva alterações do objeto',
+    'return' => 'bool'
+]);
+
+Documentation::register('Queue', [
+    'title' => 'Sistema de Filas',
+    'category' => 'System',
+    'description' => 'Gerenciamento de Jobs assíncronos no banco de dados.',
+    'version' => '1.0.0',
+    'author' => 'Infinity',
+    'tags' => ['queue', 'jobs', 'background'],
+    'since' => '2.0.0',
+    'example' => 'Queue::push(EnviarEmail::class, ["to" => "a@b.com"]);',
+    'usage' => 'use App\Queue\Queue; Queue::push($jobClass, $data);'
+]);
+
+Documentation::register('SSE', [
+    'title' => 'Server-Sent Events (Real-Time)',
+    'category' => 'Http',
+    'description' => 'Envio unidirecional de eventos do servidor para o cliente em tempo real.',
+    'version' => '1.0.0',
+    'author' => 'Infinity',
+    'tags' => ['sse', 'real-time', 'http'],
+    'since' => '2.0.0',
+    'example' => 'SSE::start();
+SSE::send(["status" => "ok"], "update");',
+    'usage' => 'use App\Http\SSE; SSE::send($data);'
+]);
+
 Documentation::register('Logger', [
     'title' => 'Sistema de Logger',
     'category' => 'Logging',

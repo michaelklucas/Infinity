@@ -1,9 +1,4 @@
 <?php
-/**
- * Infinity Framework
- * @author Infinity
- * @package Docs
- */
 
 require_once __DIR__ . '/../includes/app.php';
 

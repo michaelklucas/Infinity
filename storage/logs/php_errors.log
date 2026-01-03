@@ -138,3 +138,70 @@
 [31-Dec-2025 12:31:03 America/Sao_Paulo] [2025-12-31 12:31:03.389113] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
 [31-Dec-2025 12:31:03 America/Sao_Paulo] [2025-12-31 12:31:03.483275] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
 [31-Dec-2025 12:31:03 America/Sao_Paulo] [2025-12-31 12:31:03.483865] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[31-Dec-2025 14:46:44 America/Sao_Paulo] [2025-12-31 14:46:44.441849] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[31-Dec-2025 14:46:44 America/Sao_Paulo] [2025-12-31 14:46:44.444280] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[31-Dec-2025 14:48:28 America/Sao_Paulo] [2025-12-31 14:48:28.746674] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[31-Dec-2025 14:48:28 America/Sao_Paulo] [2025-12-31 14:48:28.748013] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[31-Dec-2025 14:49:57 America/Sao_Paulo] PHP Warning:  require(C:\xampp\htdocs\pontolinkado\includes/../vendor/autoload.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\pontolinkado\includes\app.php on line 2
+[31-Dec-2025 14:49:57 America/Sao_Paulo] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\pontolinkado\includes/../vendor/autoload.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\pontolinkado\includes\app.php:2
+Stack trace:
+#0 C:\xampp\htdocs\pontolinkado\index.php(55): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\pontolinkado\includes\app.php on line 2
+[31-Dec-2025 14:49:59 America/Sao_Paulo] PHP Warning:  require(C:\xampp\htdocs\pontolinkado\includes/../vendor/autoload.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\pontolinkado\includes\app.php on line 2
+[31-Dec-2025 14:49:59 America/Sao_Paulo] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\pontolinkado\includes/../vendor/autoload.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\pontolinkado\includes\app.php:2
+Stack trace:
+#0 C:\xampp\htdocs\pontolinkado\index.php(55): require()
+#1 {main}
+  thrown in C:\xampp\htdocs\pontolinkado\includes\app.php on line 2
+[31-Dec-2025 14:52:12 America/Sao_Paulo] [2025-12-31 14:52:12.038370] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[31-Dec-2025 14:52:12 America/Sao_Paulo] [2025-12-31 14:52:12.040179] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[31-Dec-2025 15:45:16 America/Sao_Paulo] [2025-12-31 15:45:16.317681] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[31-Dec-2025 15:45:16 America/Sao_Paulo] [2025-12-31 15:45:16.320783] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[31-Dec-2025 16:00:20 America/Sao_Paulo] [2025-12-31 16:00:20.375222] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[31-Dec-2025 16:00:20 America/Sao_Paulo] [2025-12-31 16:00:20.375739] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[31-Dec-2025 16:00:29 America/Sao_Paulo] [2025-12-31 16:00:29.242571] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[31-Dec-2025 16:00:29 America/Sao_Paulo] [2025-12-31 16:00:29.243447] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[31-Dec-2025 16:00:40 America/Sao_Paulo] [2025-12-31 16:00:40.963191] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[31-Dec-2025 16:00:40 America/Sao_Paulo] [2025-12-31 16:00:40.964250] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[31-Dec-2025 16:00:41 America/Sao_Paulo] [2025-12-31 16:00:41.060602] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[31-Dec-2025 16:00:41 America/Sao_Paulo] [2025-12-31 16:00:41.061160] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[31-Dec-2025 16:00:47 America/Sao_Paulo] [2025-12-31 16:00:47.687521] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[31-Dec-2025 16:00:47 America/Sao_Paulo] [2025-12-31 16:00:47.688079] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[31-Dec-2025 16:01:00 America/Sao_Paulo] [2025-12-31 16:01:00.974303] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[31-Dec-2025 16:01:00 America/Sao_Paulo] [2025-12-31 16:01:00.974928] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[01-Jan-2026 01:03:09 America/Sao_Paulo] [2026-01-01 01:03:09.382782] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[01-Jan-2026 01:03:09 America/Sao_Paulo] [2026-01-01 01:03:09.389041] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[01-Jan-2026 10:59:39 America/Sao_Paulo] [2026-01-01 10:59:39.093924] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[01-Jan-2026 10:59:39 America/Sao_Paulo] [2026-01-01 10:59:39.095381] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[01-Jan-2026 12:31:09 America/Sao_Paulo] [2026-01-01 12:31:09.901375] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[01-Jan-2026 12:31:09 America/Sao_Paulo] [2026-01-01 12:31:09.902821] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[01-Jan-2026 12:31:14 America/Sao_Paulo] [2026-01-01 12:31:14.257827] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[01-Jan-2026 12:31:14 America/Sao_Paulo] [2026-01-01 12:31:14.258381] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[01-Jan-2026 12:31:20 America/Sao_Paulo] [2026-01-01 12:31:20.103130] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[01-Jan-2026 12:31:20 America/Sao_Paulo] [2026-01-01 12:31:20.104189] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[01-Jan-2026 12:31:25 America/Sao_Paulo] [2026-01-01 12:31:25.594193] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[01-Jan-2026 12:31:25 America/Sao_Paulo] [2026-01-01 12:31:25.595087] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[01-Jan-2026 12:31:25 America/Sao_Paulo] [2026-01-01 12:31:25.655181] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[01-Jan-2026 12:31:25 America/Sao_Paulo] [2026-01-01 12:31:25.655659] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[01-Jan-2026 12:31:29 America/Sao_Paulo] [2026-01-01 12:31:29.075961] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[01-Jan-2026 12:31:29 America/Sao_Paulo] [2026-01-01 12:31:29.076678] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[01-Jan-2026 12:31:31 America/Sao_Paulo] [2026-01-01 12:31:31.101368] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[01-Jan-2026 12:31:31 America/Sao_Paulo] [2026-01-01 12:31:31.102470] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[01-Jan-2026 12:31:31 America/Sao_Paulo] [2026-01-01 12:31:31.160153] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[01-Jan-2026 12:31:31 America/Sao_Paulo] [2026-01-01 12:31:31.160694] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[01-Jan-2026 12:31:31 America/Sao_Paulo] [2026-01-01 12:31:31.995012] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[01-Jan-2026 12:31:31 America/Sao_Paulo] [2026-01-01 12:31:31.996609] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[01-Jan-2026 12:31:32 America/Sao_Paulo] [2026-01-01 12:31:32.208445] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[01-Jan-2026 12:31:32 America/Sao_Paulo] [2026-01-01 12:31:32.211136] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[02-Jan-2026 10:51:26 America/Sao_Paulo] [2026-01-02 10:51:26.654733] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[02-Jan-2026 10:51:26 America/Sao_Paulo] [2026-01-02 10:51:26.658218] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[02-Jan-2026 11:25:43 America/Sao_Paulo] [2026-01-02 11:25:43.027261] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[02-Jan-2026 11:25:43 America/Sao_Paulo] [2026-01-02 11:25:43.029114] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[02-Jan-2026 12:43:49 America/Sao_Paulo] [2026-01-02 12:43:49.040511] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[02-Jan-2026 12:43:49 America/Sao_Paulo] [2026-01-02 12:43:49.042105] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[02-Jan-2026 16:43:32 America/Sao_Paulo] [2026-01-02 16:43:32.584755] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[02-Jan-2026 16:43:32 America/Sao_Paulo] [2026-01-02 16:43:32.586889] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[02-Jan-2026 22:14:17 America/Sao_Paulo] [2026-01-02 22:14:17.943675] [INFO] [documentation.php:299] Sistema de documentação carregado com sucesso | {"componentes":12,"metodos":20,"categorias":6}
+[02-Jan-2026 22:14:17 America/Sao_Paulo] [2026-01-02 22:14:17.945230] [DEBUG] [app.php:134] Documentation system initialized | {"components":12}
+[03-Jan-2026 02:22:08 Europe/Berlin] PHP Fatal error:  Declaration of App\Controller\Pages\TestSSE::getPage() must be compatible with App\Controller\Pages\Page::getPage($title, $content) in C:\xampp\htdocs\pontolinkado\app\Controller\Pages\TestSSE.php on line 14

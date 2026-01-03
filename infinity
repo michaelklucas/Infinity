@@ -47,21 +47,292 @@ switch ($command) {
         $name = $argv[2] ?? null;
         if (!$name) {
             echo "{$red}Erro: Nome do controlador não informado.{$reset}\n";
+            echo "Uso: php infinity make:controller NomeDoControlador\n";
             exit;
         }
+
+        // Garante a primeira letra maiúscula
+        $name = ucfirst($name);
+
+        $template = <<<PHP
+<?php
+
+namespace App\Controller\Pages;
+
+use App\Utils\View;
+use App\Http\Request;
+use App\Services\BaseService; // Exemplo, se for usar services
+
+class {$name} extends Page
+{
+    /**
+     * Renderiza a página
+     * @param Request \$request
+     * @return string
+     */
+    public static function getPage(\$request)
+    {
+        \$content = View::render('pages/exemple'); // Substitua pelo arquivo da view correta
+
+        return parent::getPage('Título da Página', \$content);
+    }
+}
+PHP;
+
         $path = __DIR__ . "/app/Controller/Pages/{$name}.php";
-        $content = "<?php\n\nnamespace App\Controller\Pages;\n\nuse App\Utils\View;\n\nclass {$name} extends Page {\n    public static function get{$name}() {\n        return parent::getPage('{$name}', [\n            'title' => '{$name}'\n        ]);\n    }\n}\n";
-        file_put_contents($path, $content);
-        echo "{$green}Controlador {$name} criado em app/Controller/Pages/{$name}.php{$reset}\n";
+        
+        if (file_exists($path)) {
+            echo "{$red}Erro: O arquivo já existe!{$reset}\n";
+            exit;
+        }
+
+        if (file_put_contents($path, $template)) {
+            echo "{$green}Controlador [App\Controller\Pages\\{$name}] criado com sucesso!{$reset}\n";
+        } else {
+            echo "{$red}Erro ao criar arquivo.{$reset}\n";
+        }
+        break;
+
+    case 'make:service':
+        $name = $argv[2] ?? null;
+        if (!$name) {
+            echo "{$red}Erro: Nome do Serviço não informado.{$reset}\n";
+            echo "Uso: php infinity make:service NomeDoService\n";
+            exit;
+        }
+
+        // Garante sufixo Service e PascalCase
+        $name = ucfirst($name);
+        if (!str_ends_with($name, 'Service')) {
+            $name .= 'Service';
+        }
+
+        $template = <<<PHP
+<?php
+
+namespace App\Services;
+
+class {$name} extends BaseService
+{
+    /**
+     * Executa a principal regra de negócio deste serviço
+     * 
+     * @param array \$data
+     * @return array
+     */
+    public function execute(array \$data)
+    {
+        // 1. Validação (Exemplo)
+        // if (empty(\$data['id'])) {
+        //     return \$this->error('ID é obrigatório');
+        // }
+
+        // 2. Lógica de Negócio
+        
+        // 3. Retorno
+        return \$this->success([
+            'result' => 'ok'
+        ], 'Operação realizada com sucesso');
+    }
+}
+PHP;
+
+        $dir = __DIR__ . "/app/Services";
+        if (!is_dir($dir)) {
+            mkdir($dir, 0755, true);
+        }
+
+        $path = "{$dir}/{$name}.php";
+
+        if (file_exists($path)) {
+            echo "{$red}Erro: O arquivo já existe!{$reset}\n";
+            exit;
+        }
+
+        if (file_put_contents($path, $template)) {
+            echo "{$green}Serviço [App\Services\\{$name}] criado com sucesso!{$reset}\n";
+        } else {
+            echo "{$red}Erro ao criar arquivo.{$reset}\n";
+        }
+        break;
+
+    case 'make:model':
+        $name = $argv[2] ?? null;
+        if (!$name) {
+            echo "{$red}Erro: Nome do Model não informado.{$reset}\n";
+            exit;
+        }
+        $name = ucfirst($name);
+        
+        // Converte CamelCase para snake_case para sugerir nome da tabela
+        $tableName = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $name)) . 's';
+
+        $template = <<<PHP
+<?php
+
+namespace App\Model\Entity;
+
+use App\Model\Model;
+
+class {$name} extends Model
+{
+    /**
+     * Nome da tabela no banco
+     * @var string
+     */
+    protected static \$table = '{$tableName}';
+
+    // public \$nome;
+}
+PHP;
+        $dir = __DIR__ . "/app/Model/Entity";
+        if (!is_dir($dir)) {
+            mkdir($dir, 0755, true);
+        }
+
+        $path = "{$dir}/{$name}.php";
+        
+        if (file_put_contents($path, $template)) {
+             echo "{$green}Model [App\Model\Entity\\{$name}] criado com sucesso!{$reset}\n";
+        } else {
+             echo "{$red}Erro ao criar arquivo.{$reset}\n";
+        }
+        break;
+
+    case 'queue:work':
+        echo "{$blue}Iniciando Worker de Filas... (CTRL+C para parar){$reset}\n";
+        
+        // Loop infinito
+        while (true) {
+            $worked = \App\Queue\Queue::work();
+            
+            if (!$worked) {
+                // Se não tem trabalho, dorme um pouco para não fritar a CPU
+                sleep(2);
+            }
+        }
+        break;
+
+    case 'queue:table':
+        echo "{$yellow}Criando tabela de jobs...{$reset}\n";
+        $sql = "CREATE TABLE IF NOT EXISTS jobs (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            queue VARCHAR(255) NOT NULL DEFAULT 'default',
+            payload LONGTEXT NOT NULL,
+            attempts TINYINT UNSIGNED NOT NULL DEFAULT 0,
+            reserved TINYINT UNSIGNED NOT NULL DEFAULT 0,
+            reserved_at DATETIME NULL,
+            available_at DATETIME NOT NULL,
+            created_at DATETIME NOT NULL
+        ) ENGINE=InnoDB;";
+        
+        try {
+            $dbName = getenv('DB_NAME') ?: 'pontolinkado'; // Fallback
+            // Conexão direta rápida apenas para criar tabela se não exisitir
+            // Nota: Em um sistema ideal, isso seria uma Migration.
+            // Aqui estamos usando um hack rápido para configurar o sistema.
+            $pdo = new PDO('mysql:host='.getenv('DB_HOST').';dbname='.getenv('DB_NAME'), getenv('DB_USER'), getenv('DB_PASS'));
+            $pdo->exec($sql);
+            echo "{$green}Tabela 'jobs' verificada/criada com sucesso!{$reset}\n";
+        } catch (\Exception $e) {
+            echo "{$red}Erro ao criar tabela: " . $e->getMessage() . "{$reset}\n";
+        }
+        break;
+
+    case 'make:job':
+        $name = $argv[2] ?? null;
+        if (!$name) {
+            echo "{$red}Erro: Nome do Job não informado.{$reset}\n";
+            exit;
+        }
+        $name = ucfirst($name);
+        
+        $template = <<<PHP
+<?php
+
+namespace App\Jobs;
+
+class {$name}
+{
+    /**
+     * Executa o trabalho em segundo plano
+     * @param array \$data
+     */
+    public function handle(\$data)
+    {
+        // Lógica demorada aqui (Ex: Enviar Email, Processar Imagem)
+        // file_put_contents('log_job.txt', 'Processando ' . json_encode(\$data) . PHP_EOL, FILE_APPEND);
+    }
+}
+PHP;
+        $dir = __DIR__ . "/app/Jobs";
+        if (!is_dir($dir)) {
+            mkdir($dir, 0755, true);
+        }
+
+        $path = "{$dir}/{$name}.php";
+        
+        if (file_put_contents($path, $template)) {
+             echo "{$green}Job [App\Jobs\\{$name}] criado com sucesso!{$reset}\n";
+        } else {
+             echo "{$red}Erro ao criar arquivo.{$reset}\n";
+        }
+        break;
+
+    case 'make:factory':
+        $name = $argv[2] ?? null;
+        if (!$name) {
+            echo "{$red}Erro: Nome da Factory não informado.{$reset}\n";
+            exit;
+        }
+        $name = ucfirst($name); // Ex: UserFactory
+        
+        // Tenta inferir o model (UserFactory -> User)
+        $modelName = str_replace('Factory', '', $name);
+
+        $template = <<<PHP
+<?php
+
+namespace App\Database\Factory;
+
+use App\Model\Entity\\{$modelName};
+
+class {$name} extends Factory
+{
+    protected \$model = {$modelName}::class;
+
+    public function definition()
+    {
+        return [
+            // 'nome'  => \$this->faker->name,
+            // 'email' => \$this->faker->email,
+            // 'senha' => password_hash('123456', PASSWORD_DEFAULT),
+        ];
+    }
+}
+PHP;
+        $dir = __DIR__ . "/app/Database/Factory";
+        if (!is_dir($dir)) {
+            mkdir($dir, 0755, true);
+        }
+
+        $path = "{$dir}/{$name}.php";
+        
+        if (file_put_contents($path, $template)) {
+             echo "{$green}Factory [App\Database\Factory\\{$name}] criada com sucesso!{$reset}\n";
+        } else {
+             echo "{$red}Erro ao criar arquivo.{$reset}\n";
+        }
         break;
 
     case 'help':
     default:
         echo "Comandos disponíveis:\n";
-        echo "  {$yellow}migrate{$reset}             Executa as migrações do banco de dados\n";
-        echo "  {$yellow}cache:clear{$reset}         Limpa todos os arquivos de cache\n";
-        echo "  {$yellow}make:controller [N]{$reset} Cria um novo controlador de página\n";
-        echo "  {$yellow}make:model [N]{$reset}      Cria um novo modelo de entidade\n";
+        echo "  {$yellow}migrate{$reset}                     Executa as migrações do banco de dados\n";
+        echo "  {$yellow}cache:clear{$reset}                 Limpa todos os arquivos de cache\n";
+        echo "  {$yellow}make:controller [Nome]{$reset}      Cria um novo controlador de página\n";
+        echo "  {$yellow}make:service [Nome]{$reset}         Cria um novo serviço de lógica de negócio\n";
+        echo "  {$yellow}make:model [Nome]{$reset}           Cria um novo modelo de entidade\n";
         break;
 }
 echo "\n";

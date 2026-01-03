@@ -1,19 +1,9 @@
 <?php
-/**
- * Infinity Framework
- * @author Infinity
- * @package App\Controller\Pages
- */
 
 namespace App\Controller\Pages;
 
 use App\Utils\View;
 
-/**
- * Controller do painel (Dashboard).
- *
- * @package App\Controller\Pages
- */
 class Dashboard extends Page
 {
     /**

@@ -20,11 +20,15 @@
         "phpmailer/phpmailer": "^6.8",
         "aws/aws-sdk-php": "^3.344",
         "ralouphie/getallheaders": "^3.0",
-        "predis/predis": "^3.0"
+        "predis/predis": "^3.0",
+        "fakerphp/faker": "*"
     },
     "config": {
         "platform": {
             "php": "8.2.0"
         }
+    },
+    "require-dev": {
+        "pestphp/pest": "*"
     }
 }

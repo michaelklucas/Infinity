@@ -87,6 +87,9 @@ class Response
      */
     private function sendHeaders(): void
     {
+        // Aplica cabeçalhos de segurança globais
+        \App\Utils\Security::setSecurityHeaders();
+
         // Status HTTP
         http_response_code($this->httpCode);
 

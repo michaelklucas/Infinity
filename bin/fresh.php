@@ -7,12 +7,6 @@
  * Usage: php bin/fresh.php
  */
 
-/**
- * Infinity Framework
- * @author Infinity
- * @package Bin
- */
-
 require_once __DIR__ . '/../includes/app.php';
 
 echo "🔄 Iniciando reset do banco de dados...\n\n";

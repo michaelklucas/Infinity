@@ -1,9 +1,4 @@
 <?php
-/**
- * Infinity Framework
- * @author Infinity
- * @package Routes\Web
- */
 
 use App\Http\Response;
 use App\Controller\Pages\Home;
@@ -113,5 +108,23 @@ $obRouter->get('/debug-test', [
 $obRouter->get('/hello/{name}', [
     function($name) {
         return new Response(200, "Olá, $name! Bem-vindo ao Infinity Framework.");
+    }
+]);
+
+/**
+ * Rotas de Teste SSE (Real-Time)
+ */
+use App\Controller\Pages\TestSSE;
+
+$obRouter->get('/sse', [
+    function($request) {
+        return new Response(200, TestSSE::getTestPage());
+    }
+]);
+
+$obRouter->get('/sse/stream', [
+    function($request) {
+        // SSE não retorna Response comum, ele mata o processo com exit no loop
+        TestSSE::stream();
     }
 ]);

@@ -1,0 +1,100 @@
+<div class="container mt-5">
+    <div class="card glass-effect">
+        <div class="card-header">
+            <h3>📡 Teste de Real-Time (SSE)</h3>
+        </div>
+        <div class="card-body">
+            <p>Clique no botão abaixo para iniciar um processamento simulado no servidor. O progresso será atualizado em tempo real sem recarregar a página.</p>
+            
+            <button id="startBtn" class="btn btn-primary" onclick="startProcess()">
+                <i class='bx bx-play'></i> Iniciar Processo
+            </button>
+
+            <hr>
+
+            <!-- Barra de Progresso -->
+            <div class="progress mb-3" style="height: 25px; display: none;" id="progressContainer">
+                <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 0%">0%</div>
+            </div>
+
+            <!-- Log de Eventos -->
+            <div id="logOutput" class="p-3 bg-dark text-success rounded font-monospace" style="height: 200px; overflow-y: auto; display: none;">
+                <div class="text-muted">> Aguardando comando...</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let evtSource;
+
+    function startProcess() {
+        const btn = document.getElementById('startBtn');
+        const log = document.getElementById('logOutput');
+        const progContainer = document.getElementById('progressContainer');
+        const progBar = document.getElementById('progressBar');
+
+        // Reset UI
+        btn.disabled = true;
+        btn.innerHTML = "<i class='bx bx-loader-alt bx-spin'></i> Processando...";
+        log.style.display = 'block';
+        progContainer.style.display = 'flex';
+        log.innerHTML = '';
+        progBar.style.width = '0%';
+        progBar.innerText = '0%';
+        
+        addLog('> Conectando ao stream...');
+
+        // Fecha conexão anterior se existir
+        if (evtSource) {
+            evtSource.close();
+        }
+
+        // Inicia conexão SSE
+        evtSource = new EventSource('/sse/stream');
+
+        // Evento genérico (message) ou customizado
+        evtSource.onopen = function() {
+            addLog('> Conectado! Recebendo dados...');
+        };
+
+        // Escuta evento customizado 'update' definido no PHP
+        evtSource.addEventListener('update', function(e) {
+            const data = JSON.parse(e.data);
+            
+            // Atualiza barra
+            progBar.style.width = data.progress + '%';
+            progBar.innerText = data.progress + '%';
+            
+            // Adiciona log
+            addLog(`[${data.timestamp}] ${data.message}`);
+        });
+
+        // Escuta evento 'complete'
+        evtSource.addEventListener('complete', function(e) {
+            const data = JSON.parse(e.data);
+            addLog(`> <span class="text-white fw-bold">${data.message}</span>`);
+            
+            // Finaliza
+            evtSource.close();
+            btn.disabled = false;
+            btn.innerHTML = "<i class='bx bx-play'></i> Iniciar Novamente";
+            progBar.classList.remove('progress-bar-animated');
+        });
+
+        // Tratamento de erro
+        evtSource.onerror = function(e) {
+            console.error("EventSource failed:", e);
+            addLog('> <span class="text-danger">Conexão encerrada ou erro.</span>');
+            evtSource.close();
+            btn.disabled = false;
+            btn.innerHTML = "<i class='bx bx-play'></i> Tentar Novamente";
+        };
+    }
+
+    function addLog(msg) {
+        const log = document.getElementById('logOutput');
+        log.innerHTML += `<div>${msg}</div>`;
+        log.scrollTop = log.scrollHeight; // Auto-scroll
+    }
+</script>

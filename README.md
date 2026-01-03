@@ -1,147 +1,176 @@
-# ♾️ Infinity Framework
+# ♾️ Infinity Framework 2.0
 
-![Showcase Banner](./resources/view/assets/screenshots/banner.png)
+![Banner](./resources/view/assets/screenshots/banner.png)
 
-![Status](https://img.shields.io/badge/Status-Beta-indigo?style=for-the-badge)
-![PHP](https://img.shields.io/badge/PHP-8.1+-777bb4?style=for-the-badge&logo=php)
+![PHP Version](https://img.shields.io/badge/PHP-8.2+-777bb4?style=for-the-badge&logo=php)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Production%20Ready-success?style=for-the-badge)
 
-### 🇧🇷 Elegância, Velocidade e Simplicidade. O Framework PHP que o Brasil merece.
+### 🇧🇷 A Evolução do Framework PHP.
+**Elegância de Laravel, Velocidade de Slim, Simplicidade de CodeIgniter.**
 
-O **Infinity Framework** foi projetado para desenvolvedores que valorizam estética e performance. Com uma arquitetura leve, ele entrega uma experiência de codificação fluida sem a sobrecarga de frameworks gigantescos.
+O **Infinity Framework** é uma ferramenta moderna para desenvolvedores que buscam produtividade sem o "peso" de frameworks Enterprise. Com uma arquitetura **MVC** sólida, **Active Record ORM**, **Filas Assíncronas**, e **Real-Time** nativo, ele está pronto para tudo: de MVPs rápidos a SaaS complexos.
+
+---
+
+## 🚀 Novidades da Versão 2.0
+
+-   🛠️ **Infinity Console (CLI):** Gere Controllers, Models, Services e Jobs com um comando.
+-   💾 **Active Record ORM:** Banco de dados sem SQL manual. Suporte a relacionamentos (`hasOne`, `hasMany`).
+-   ⚡ **Real-Time (SSE):** Server-Sent Events nativo para atualizações em tempo real sem WebSockets complexos.
+-   T **Filas & Jobs:** Processamento em segundo plano (Background Workers) nativo no banco de dados.
+-   🛡️ **Security First:** Headers de segurança automáticos, Auth Service blindado e Proteção CSRF.
+-   🧪 **Testes & Factories:** Integração com Pest PHP e Faker para testes automatizados.
+
+---
+
+## 🛠️ Infinity Console (CLI)
+
+O framework possui uma ferramenta de linha de comando poderosa na raiz do projeto.
+
+```bash
+# Criar um novo Controller
+php infinity make:controller Dashboard
+
+# Criar um Model com ORM
+php infinity make:model Produto
+
+# Criar um Service (Regra de Negócio)
+php infinity make:service Pagamento
+
+# Criar um Job (Processamento em Fila)
+php infinity make:job EnviarEmail
+
+# Criar uma Factory para Testes
+php infinity make:factory UserFactory
+
+# Rodar as Migrations (Auto-Migrate)
+php infinity migrate
+
+# Rodar o Worker de Filas
+php infinity queue:work
+```
+
+---
+
+## 📚 Guia Rápido de Uso
+
+### 1. Active Record (ORM)
+Esqueça SQL manual. Use Models fluentes.
+
+```php
+use App\Model\Entity\User;
+
+// Criar
+$user = User::create(['nome' => 'Michael', 'email' => 'michael@infinity.com']);
+
+// Buscar e Atualizar
+$user = User::find(1);
+$user->nome = "Michael Simão";
+$user->save();
+
+// Relacionamentos
+$pedidos = $user->hasMany(Pedido::class);
+```
+
+### 2. Services & Auth
+Mantenha seus Controllers limpos movendo a lógica para Services.
+
+```php
+use App\Services\AuthService;
+
+// No Controller
+public function login($request) {
+    $auth = new AuthService();
+    return $auth->login($request->post('email'), $request->post('senha'));
+}
+
+// Proteger Rota
+AuthService::requireLogin();
+```
+
+### 3. Real-Time (SSE)
+Envie atualizações do servidor para o cliente instantaneamente.
+
+```php
+use App\Http\SSE;
+
+// Na Rota
+SSE::start();
+SSE::send(['status' => 'Processando...'], 'update');
+sleep(2);
+SSE::send(['status' => 'Concluído!'], 'complete');
+```
+
+### 4. Filas (Jobs)
+Processe tarefas pesadas em segundo plano sem travar o navegador.
+
+```php
+use App\Queue\Queue;
+use App\Jobs\ProcessarVideo;
+
+// Despachar Job
+Queue::push(ProcessarVideo::class, ['video_id' => 50]);
+
+// No Terminal (Rode em background)
+// php infinity queue:work
+```
+
+---
+
+## ⚡ Instalação
+
+### Requisitos
+-   PHP 8.2 ou superior
+-   Extensão PDO, Fileinfo
+-   Composer
+
+### Passo a Passo
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone https://github.com/michaelklucas/Infinity.git
+    cd Infinity
+    ```
+
+2.  **Instale as dependências:**
+    ```bash
+    composer install
+    ```
+
+3.  **Configure o ambiente:**
+    Renomeie `.env.example` para `.env` e configure o banco de dados.
+
+4.  **Inicie o Banco de Dados:**
+    ```bash
+    php infinity migrate    # Cria tabelas essenciais
+    php infinity queue:table # Cria tabela de Jobs
+    ```
+
+5.  **Rode o servidor:**
+    Use XAMPP, Laragon ou o servidor embutido:
+    ```bash
+    php -S localhost:8000
+    ```
 
 ---
 
 ## 📸 Galeria
 
-| Login (Glass) | Home (Showcase) | Clientes (CRUD) |
-|:---:|:---:|:---:|
-| ![Login](./resources/view/assets/screenshots/login.png) | ![Home](./resources/view/assets/screenshots/home.png) | ![Clientes](./resources/view/assets/screenshots/clients.png) |
-
----
-
-## ✨ Destaques
-
-![Dashboard Preview](./resources/view/assets/screenshots/dashboard.png)
-
--   🚀 **Performance Extrema:** Núcleo minimalista otimizado para baixíssima latência.
--   🎨 **Design Premium:** Layouts modernos com tema dark e estética Glassmorphism por padrão.
--   🔎 **Debug Bar Elite:** Uma barra de depuração poderosa que desacopla em janela separada, rastreia Queries SQL e Logs em tempo real.
--   📦 **Storage Flexível:** Suporte nativo para Local e Amazon S3 pronto para produção.
--   🗂️ **Arquitetura MVC:** Separação clara de responsabilidades para projetos escaláveis.
--   🔐 **Segurança Integrada:** Middlewares de autenticação e proteção de rotas simplificados.
-
----
-
-## 🐞 Power Debugging
-
-![DebugBar Preview](./resources/view/assets/screenshots/debugbar.png)
-
-O Infinity conta com a **Infinity DebugBar**, uma ferramenta indispensável para o desenvolvimento:
--   **Desacoplamento:** Clique em "Popout" para mover o debug para um segundo monitor.
--   **Live Sync:** Dados de SQL e Logs são atualizados instantaneamente conforme você navega na aplicação.
--   **Memory Peak:** Monitore o consumo exato de memória de cada rota.
-
----
-
-## 📖 Documentação Offline-First
-
-![Docs Preview](./resources/view/assets/screenshots/docs.png)
-
-Diferente de outros frameworks que dependem de sites externos ou conexão constante, o Infinity traz a **documentação completa embutida**.
-
-Ao navegar para a rota `/docs` na sua aplicação local, você terá acesso a um sistema de documentação rico (estilo Aurora), rápido e que funciona **100% offline**. Isso é a nossa "fonte da verdade" — guias sobre roteamento, controllers, banco de dados e muito mais, sempre à mão para te guiar.
-
----
-
-## 🛠️ Tecnologias
-
--   **Backend:** PHP 8.1+
--   **Arquitetura:** MVC (Model, View, Controller)
--   **Frontend:** HTML5, CSS3 (Vanilla), JavaScript
--   **Ícones:** Boxicons
--   **Fonts:** Outfit Google Fonts
-
----
-
-## 🚀 Começando Agora
-
-### 1. Requisitos
--   PHP 8.1 ou superior
--   Extensão MySQL
--   XAMPP / Laragon ou Apache com mod_reveal habilitado
-
-### 2. Instalação
-Clone o repositório no seu servidor local:
-```bash
-git clone https://github.com/michaelklucas/Infinity.git
-```
-
-### 3. Configuração
-Renomeie o arquivo `exemple.env` para `.env` e configure suas variáveis de ambiente:
-```env
-# Aplicação
-URL=http://localhost/infinity
-NAME_APP="Infinity Framework"
-JWT=
-APP_DEBUG=true
-APP_DOCS=true
-MAINTENANCE=false
-
-# Banco de Dados
-DB_HOST=localhost
-DB_NAME=infinity_db
-DB_USER=root
-DB_PASS=
-DB_PORT=3306
-
-# E-mail (SMTP)
-MAIL_HOST=smtp.mailtrap.io
-MAIL_PORT=2525
-MAIL_USERNAME=
-MAIL_PASSWORD=
-MAIL_FROM_NAME="Infinity Framework"
-MAIL_FROM_EMAIL=no-reply@infinity.com
-MAIL_SECURE=tls
-
-# Cache & Redis
-CACHE_DRIVER=file
-CACHE_TIME=120
-CACHE_DIR=app/Cache
-REDIS_HOST=127.0.0.1
-REDIS_PORT=6379
-REDIS_PASS=
-
-# Storage (Local ou S3)
-STORAGE_DRIVER=local
-S3_KEY=
-S3_SECRET=
-S3_REGION=us-east-1
-S3_BUCKET=
-S3_ENDPOINT=
-```
+| Login (Glass) | Home (Showcase) |
+|:---:|:---:|
+| ![Login](./resources/view/assets/screenshots/login.png) | ![Home](./resources/view/assets/screenshots/home.png) |
 
 ---
 
 ## 🤝 Contribuindo
 
-O Infinity é um projeto de código aberto feito por brasileiros para o mundo. Sinta-se à vontade para abrir Issues ou enviar Pull Requests!
+Pull Requests são bem-vindos! O Infinity é Open Source e feito para a comunidade.
+
+### 💰 Apoie o Projeto
+Mantenha o framework vivo e evoluindo! Se este projeto te ajudou, considere fazer uma doação de qualquer valor:
+
+**Chave PIX:** `michael16klucas@gmail.com`
 
 ### Créditos
 Desenvolvido com ❤️ por [Michael Simão](https://github.com/michaelklucas)
-
----
-
-## 💝 Doações
-
-Se você gostou do Infinity e deseja apoiar o desenvolvimento e a manutenção do framework, considere fazer uma doação via Pix:
-
-**Chave Pix:** `michael16klucas@gmail.com`
-
-Agradeço imensamente qualquer contribuição — cada apoio ajuda a financiar melhorias, manutenção e novas funcionalidades.
-
----
-
-<p align="center">
-  <img src="./resources/view/assets/favicon.svg" alt="Infinity Framework" width="80">
-</p>
